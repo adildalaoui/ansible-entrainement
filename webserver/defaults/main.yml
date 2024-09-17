@@ -1,0 +1,4 @@
+---
+# Variables par défaut pour le rôle webserver
+nginx_port: 80
+

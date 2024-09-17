@@ -1,0 +1,28 @@
+---
+- name: Installer Nginx
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+  tags:
+    - install
+
+- name: Copier le fichier "Hello World"
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    owner: www-data
+    group: www-data
+    mode: '0644'
+  notify: Redémarrer Nginx
+  tags:
+    - deploy
+
+- name: Assurer que Nginx est en cours d'exécution
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+  tags:
+    - service
+
